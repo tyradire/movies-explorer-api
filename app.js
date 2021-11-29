@@ -39,12 +39,12 @@ app.use(requestLogger);
 
 app.use(appRouter);
 
-app.use(errorLogger);
 app.use((req, res, next) => {
   next(new NotFoundError('Был запрошен несуществующий роут'));
 });
-app.use(errors());
 
+app.use(errorLogger);
+app.use(errors());
 app.use(sendError);
 
 mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://localhost:27017/moviesdb', { useNewUrlParser: true });
