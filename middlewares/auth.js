@@ -5,7 +5,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const verify = (req, res, next) => {
   const { authorization } = req.headers;
-  if (!authorization) return next(new UnauthorizedError('Необходима авторизация'));
+  if (!authorization) next(new UnauthorizedError('Необходима авторизация'));
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {

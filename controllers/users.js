@@ -24,7 +24,7 @@ const createUser = (req, res, next) => {
       email: user.email, name: user.name, _id: user._id,
     }))
     .catch((err) => {
-      if (err.name === 'ValidationError') return next(new CastError('Переданы некорректные данные при создании пользователя'));
+      if (err.name === 'ValidationError') next(new CastError('Переданы некорректные данные при создании пользователя'));
       next(err);
     });
 };
@@ -43,7 +43,7 @@ const editUserInfo = (req, res, next) => User.findByIdAndUpdate(
     return res.status(200).send(user);
   })
   .catch((err) => {
-    if (err.name === 'ValidationError') return next(new CastError('Переданы некорректные данные при обновлении профиля'));
+    if (err.name === 'ValidationError') next(new CastError('Переданы некорректные данные при обновлении профиля'));
     next(err);
   });
 

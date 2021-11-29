@@ -10,7 +10,7 @@ const createMovie = (req, res, next) => {
   })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
-      if (err.name === 'ValidationError') return next(new CastError('Переданы некорректные данные при создании фильма'));
+      if (err.name === 'ValidationError') next(new CastError('Переданы некорректные данные при создании фильма'));
       next(err);
     });
 };

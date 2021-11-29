@@ -8,6 +8,9 @@ const NotFoundError = require('./errors/NotFoundError');
 const {
   requestLogger, errorLogger,
 } = require('./middlewares/logger');
+const {
+  sendError,
+} = require('./middlewares/sendError');
 
 const PORT = 3000;
 const app = express();
@@ -36,11 +39,8 @@ app.use((req, res, next) => {
   next(new NotFoundError('Был запрошен несуществующий роут'));
 });
 app.use(errors());
-/* eslint-disable no-unused-vars, no-console */
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
-});
+
+app.use(sendError);
 
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb', { useNewUrlParser: true });
 
