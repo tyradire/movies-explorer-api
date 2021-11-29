@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
-const limiter = require('./middlewares/rateLimiter');
 require('dotenv').config();
 const appRouter = require('./routes/index');
 const NotFoundError = require('./errors/NotFoundError');
@@ -12,6 +11,7 @@ const {
 const {
   sendError,
 } = require('./middlewares/sendError');
+const limiter = require('./middlewares/rateLimiter');
 
 const {
   NODE_ENV,
