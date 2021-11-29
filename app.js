@@ -11,7 +11,9 @@ const {
 const {
   sendError,
 } = require('./middlewares/sendError');
-const limiter = require('./middlewares/rateLimiter');
+const {
+  limiter,
+} = require('./middlewares/rateLimiter');
 
 const {
   NODE_ENV,
