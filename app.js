@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const limiter = require('./middlewares/rateLimiter');
 require('dotenv').config();
 const appRouter = require('./routes/index');
 const NotFoundError = require('./errors/NotFoundError');
@@ -36,7 +37,7 @@ const options = {
 app.use('*', cors(options));
 app.use(express.json());
 app.use(requestLogger);
-
+app.use(limiter);
 app.use(appRouter);
 
 app.use((req, res, next) => {
