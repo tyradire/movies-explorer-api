@@ -14,7 +14,7 @@ const createUser = (req, res, next) => {
   } = req.body;
   User.findOne({ email })
     .then((user) => {
-      if (user) throw new ConflictError('Неправильный email');
+      if (user) throw new ConflictError('Пользователь с таким email уже существует');
       return bcrypt.hash(password, 10);
     })
     .then((hash) => User.create({
@@ -43,6 +43,7 @@ const editUserInfo = (req, res, next) => User.findByIdAndUpdate(
     return res.status(200).send(user);
   })
   .catch((err) => {
+    if (err.name === 'MongoServerError') next(new ConflictError('Пользователь с таким email уже существует'));
     if (err.name === 'ValidationError') next(new CastError('Переданы некорректные данные при обновлении профиля'));
     next(err);
   });
