@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
 require('dotenv').config();
@@ -23,8 +22,6 @@ const {
 
 const PORT = 3000;
 const app = express();
-
-app.use(helmet());
 
 const options = {
   origin: [
