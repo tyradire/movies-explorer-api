@@ -12,6 +12,11 @@ const {
   sendError,
 } = require('./middlewares/sendError');
 
+const {
+  NODE_ENV,
+  DB_URL,
+} = process.env;
+
 const PORT = 3000;
 const app = express();
 
@@ -42,6 +47,6 @@ app.use(errors());
 
 app.use(sendError);
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', { useNewUrlParser: true });
+mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://localhost:27017/moviesdb', { useNewUrlParser: true });
 
 app.listen(PORT, () => console.log('Express is running'));
