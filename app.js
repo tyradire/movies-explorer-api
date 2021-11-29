@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
@@ -19,6 +20,7 @@ const {
 
 const PORT = 3000;
 const app = express();
+app.use(helmet());
 
 const options = {
   origin: [
