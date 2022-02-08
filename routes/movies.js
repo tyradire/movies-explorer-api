@@ -9,8 +9,8 @@ const {
 
 movieRouter.post('/movies', celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(30),
-    director: Joi.string().required().min(2).max(30),
+    country: Joi.string().required().min(2).max(50),
+    director: Joi.string().required().min(2).max(100),
     duration: Joi.number().required().min(1).max(500),
     year: Joi.string().required().min(2).max(30),
     description: Joi.string().required().min(2).max(1000),
@@ -19,9 +19,9 @@ movieRouter.post('/movies', celebrate({
     thumbnail: Joi.string().required().custom(urlValidator),
     movieId: Joi.number().required().min(1).max(1000),
     nameRU: Joi.string().required().min(2).max(100)
-      .regex(/^[А-Яа-яёЁ0-9._^%$#!~@,-\d\s]+$/),
+      .regex(/^[А-Яа-яёЁ.^%$#!~@'"`,-\w\s]+$/),
     nameEN: Joi.string().required().min(2).max(100)
-      .regex(/^[A-Za-z0-9._^%$#!~@,-\d\s]+$/),
+      .regex(/^[\w.^%$#!~@'"`,-\d\s]+$/),
   }),
 }), createMovie);
 
