@@ -9,19 +9,19 @@ const {
 
 movieRouter.post('/movies', celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(50),
+    country: Joi.string().required().min(2).max(500),
     director: Joi.string().required().min(2).max(100),
     duration: Joi.number().required().min(1).max(500),
     year: Joi.string().required().min(2).max(30),
-    description: Joi.string().required().min(2).max(1000),
+    description: Joi.string().required().min(2).max(5000),
     image: Joi.string().required().custom(urlValidator),
     trailer: Joi.string().required().custom(urlValidator),
     thumbnail: Joi.string().required().custom(urlValidator),
     movieId: Joi.number().required().min(1).max(1000),
     nameRU: Joi.string().required().min(2).max(100)
-      .regex(/^[А-Яа-яёЁ.^%$#!~@'"`,-\w\s]+$/),
+      .regex(/^[А-Яа-яёЁ.^*%$#!~@—'"`,-\w\s]+$/),
     nameEN: Joi.string().required().min(2).max(100)
-      .regex(/^[\w.^%$#!~@'"`,-\d\s]+$/),
+      .regex(/^[\w.^*%$#!~@—'"`,-\d\s]+$/),
   }),
 }), createMovie);
 
